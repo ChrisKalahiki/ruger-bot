@@ -20,6 +20,7 @@ console.log('Bot is running!');
 
 bot.on("message", (message) => {
   if (message.content.startsWith(prefix+command)) {
+    message.delete(500);
     message.channel.send(randomQuote());
   }
 });
