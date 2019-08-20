@@ -19,11 +19,10 @@ il.run();
 console.log('Bot is running!');
 
 bot.on("message", (message) => {
-  if (message.content.startsWith(prefix+"quote")) {
-    message.delete(500);
-    message.channel.send(randomQuote());
+  if (message.content.startsWith(prefix+"Do you read me?")) {
+    message.channel.send("Hello, <@"+message.author.id+">. I read you.");
   }
-});
+})
 
 bot.on("message", (message) => {
   if (message.content.startsWith(prefix+"ping")) {
@@ -38,9 +37,10 @@ bot.on("message", (message) => {
 })
 
 bot.on("message", (message) => {
-  if (message.content.startsWith(prefix+"Do you read me?")) {
-    message.channel.send("Hello, <@"+message.author.id+">. I read you.");
+  if (message.content.startsWith(prefix+"quote")) {
+    message.delete(500);
+    message.channel.send(randomQuote());
   }
-})
+});
 
 bot.login(config.token);
