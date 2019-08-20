@@ -39,17 +39,26 @@ quotes = ["'Weddings are basically funerals with cake.' - Rick",
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-# @client.event
-# async def on_message(message):
-#     if message.author == client.user:
-#         return
+@client.event
+async def on_message(message):
+    print(f"{message.channel}: {message.author}: {message.author.name}: {message.content}")
 
-#     if message.content.startswith('$hello'):
-#         await message.channel.send('Hello!')
+    if "hello" in message.content.lower():
+        await message.channel.send("Hi!")
+
+@client.event
+async def ping_pong(message):
+    if message.content.startswith("ping"):
+        await message.channel.send("Pong!")
+
+@client.event
+async def foobar(message):
+    if message.content.startswith("foo"):
+        await message.channel.send("bar")
 
 @client.event
 async def random_quote(message):
-    if message.content.startswith('quote'):
-        return quotes[math.floor(random.randint(1,len(quotes)) * len(quotes))]
+    if message.content.startswith("quote"):
+        await message.channel.send(quotes[math.floor(random.randint(1,len(quotes)) * len(quotes))])
 
 client.run(TOKEN)
