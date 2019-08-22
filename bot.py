@@ -6,6 +6,7 @@ import json
 import discord
 import math
 import logging
+import re
 
 from discord.ext.commands import Bot
 
@@ -66,7 +67,8 @@ def sentiment_analyzer_scores(text):
     else:
         return 'negative'
 
-# print(sentiment_analyzer_scores('programmieren ist lustig')) # Debug
+def random_quote():
+    return quotes[random.randint(1,len(quotes)) % len(quotes)]
 
 @client.event
 async def on_ready():
@@ -78,38 +80,23 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    if message.content.startswith('quote'):
+        print('quote is firing')
+        await message.channel.send(random_quote())
+
+    if message.content.startswith('say'):
+        print('copy is firing')
+        await message.channel.send(message.content)
+
+    if message.content.startswith("ping"):
+        await message.channel.send("Pong!")
+
+    if message.content.startswith("foo"):
+        await message.channel.send("bar")
+
     sentiment = sentiment_analyzer_scores(message.content)
     print('sentiment: ' + str(sentiment))
     await message.channel.send('The sentiment of your text is ' + str(sentiment))
 
-@bot.command(name='quote')
-async def quote(ctx):
-    print('quote is firing')
-    await ctx.channel.send(quotes[math.floor(random.randint(1,len(quotes)) * len(quotes))])
-
-@bot.command(name='copy')
-async def copy(ctx, arg):
-    print('copy is firing')
-    await ctx.send(arg)
-
 # run the bot
 client.run(TOKEN)
-
-
-
-# @client.event
-# async def on_message(message):
-#     print(f"{message.channel}: {message.author}: {message.author.name}: {message.content}")
-
-#     if "hello" in message.content.lower():
-#         await message.channel.send("Hi!")
-
-# @client.event
-# async def ping_pong(message):
-#     if message.content.startswith("ping"):
-#         await message.channel.send("Pong!")
-
-# @client.event
-# async def foobar(message):
-#     if message.content.startswith("foo"):
-#         await message.channel.send("bar")
