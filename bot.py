@@ -83,20 +83,10 @@ async def on_message(message):
     if message.content.startswith('quote'):
         print('quote is firing')
         await message.channel.send(random_quote())
-
-    if message.content.startswith('say'):
-        print('copy is firing')
-        await message.channel.send(message.content)
-
-    if message.content.startswith("ping"):
-        await message.channel.send("Pong!")
-
-    if message.content.startswith("foo"):
-        await message.channel.send("bar")
-
-    sentiment = sentiment_analyzer_scores(message.content)
-    print('sentiment: ' + str(sentiment))
-    await message.channel.send('The sentiment of your text is ' + str(sentiment))
+    else:
+        sentiment = sentiment_analyzer_scores(message.content)
+        print('sentiment: ' + str(sentiment))
+        await message.channel.send('The sentiment of your text is ' + str(sentiment))
 
 # run the bot
 client.run(TOKEN)
