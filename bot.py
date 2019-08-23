@@ -2,13 +2,9 @@
 import random
 import asyncio
 import aiohttp
-import json
 import discord
 import math
 import logging
-import re
-
-from discord.ext.commands import Bot
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -16,7 +12,6 @@ handler = logging.FileHandler(filename='discord.log', encoding='utf-8',mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
 
-BOT_PREFIX = (".")
 TOKEN = "NjEzMTI0NjA4MzU0Mjg3Nzg3.XVsXCg.jTPbdAWLqd64y6SjMaxsYQTrsC0"
 
 quotes = ["'Weddings are basically funerals with cake.' - Rick", 
@@ -45,7 +40,6 @@ quotes = ["'Weddings are basically funerals with cake.' - Rick",
 
 # create discord client
 client = discord.Client()
-bot = Bot(command_prefix='.')
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from googletrans import Translator
