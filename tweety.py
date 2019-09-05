@@ -16,7 +16,6 @@ class TwitterClient(object):
 		consumer_secret = 'siSOYCxXPnO31PdPVeefjlPA86g6JVVli4UkKKnujCMRzBvGde'
 		access_token = '964329956376567809-Lo9h6A3nougib6POTyx2qku0lLtpzPz'
 		access_token_secret = 'dK64mI0c2Y4NXkc9jI4f6XpqUzxnzEYg1PWzkwDwDakhT'
-
 		# create sentiment analyzer object
 		analyzer = SentimentIntensityAnalyzer()
 		translator = Translator()
