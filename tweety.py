@@ -5,6 +5,8 @@ import re
 import tweepy 
 from tweepy import OAuthHandler 
 from textblob import TextBlob 
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from googletrans import Translator
 
 class TwitterClient(object):
 	def __init__(self):
@@ -14,6 +16,10 @@ class TwitterClient(object):
 		consumer_secret = 'siSOYCxXPnO31PdPVeefjlPA86g6JVVli4UkKKnujCMRzBvGde'
 		access_token = '964329956376567809-Lo9h6A3nougib6POTyx2qku0lLtpzPz'
 		access_token_secret = 'dK64mI0c2Y4NXkc9jI4f6XpqUzxnzEYg1PWzkwDwDakhT'
+
+		# create sentiment analyzer object
+		analyzer = SentimentIntensityAnalyzer()
+		translator = Translator()
 
 		# attempt authentication 
 		try: 
@@ -25,6 +31,19 @@ class TwitterClient(object):
 			self.api = tweepy.API(self.auth) 
 		except: 
 			print("Error: Authentication Failed") 
+
+	def sentiment_analyzer_scores(self, text):
+		trans = translator.translate(text).text
+
+		score = analyzer.polarity_scores(trans)
+		lb = score['compound']
+		print(score)
+		if lb >= 0.05:
+			return 'positive'
+		elif (lb > -0.05) and (lb <0.05):
+			return 'neutral'
+		else:
+			return 'negative'
 
 	def clean_tweet(self, tweet):
 		# Utility function to clean tweet text by removing links, special characters 
