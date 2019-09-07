@@ -69,47 +69,38 @@ class TwitterClient(object):
 
 	def get_tweets(self, query, count = 10):
 		tweets = [] 
-
 		try:
 			fetched_tweets = self.api.search(q = query, count = count) 
-
 			for tweet in fetched_tweets:
 				parsed_tweet = {} 
 				parsed_tweet['text'] = tweet.text
 				parsed_tweet['sentiment'] = self.sentiment_analyzer_scores(self.clean_tweet(tweet.text))
-
 				if tweet.retweet_count > 0:
 					if parsed_tweet not in tweets: 
 						tweets.append(parsed_tweet) 
 				else: 
 					tweets.append(parsed_tweet) 
-
 			return tweets 
-
 		except tweepy.TweepError as e:
 			print("Error : " + str(e)) 
 
 def main():
 	api = TwitterClient()
 	tweets = api.get_tweets(query = 'Donald Trump', count = 500) 
-
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
 	ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
-
 	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
 	print("Neutral tweets percentage: {} %".format(100*((len(tweets) - len(ntweets) - len(ptweets))/len(tweets))))
 	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
 
 # create discord client
 client = discord.Client()
-
 # create sentiment analyzer object
 analyzer = SentimentIntensityAnalyzer()
 translator = Translator()
 
 def sentiment_analyzer_scores(text):
     trans = translator.translate(text).text
-
     score = analyzer.polarity_scores(trans)
     lb = score['compound']
     print(score)
@@ -126,10 +117,8 @@ def random_quote():
 def trump_poll():
 	api = TwitterClient()
 	tweets = api.get_tweets(query = 'Donald Trump', count = 500) 
-
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
 	ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
-
 	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
 	print("Neutral tweets percentage: {} %".format(100*((len(tweets) - len(ntweets) - len(ptweets))/len(tweets))))
 	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
@@ -138,12 +127,10 @@ def trump_poll():
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-# on message event-handler
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-
     if message.content.startswith('quote'):
         print('quote is firing')
         await message.channel.send(random_quote())
@@ -155,5 +142,4 @@ async def on_message(message):
         print('sentiment: ' + str(sentiment))
         await message.channel.send('The sentiment of your text is ' + str(sentiment))
 
-# run the bot
 client.run(TOKEN)
