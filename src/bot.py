@@ -127,9 +127,10 @@ async def on_message(message):
         await message.channel.send(random_quote())
     elif message.content.startswith('check twitter'):
         print('checking twitter')
-        await message.channel.send(poll(message.content, 25))
+        print(poll(message.content.split(' ', 2)[2], 25))
+        await message.channel.send(poll(message.content.split(' ', 2)[2], 25))
     else:
-        sentiment = sentiment_analyzer_scores(message.content.split(' ', 2)[2])
+        sentiment = sentiment_analyzer_scores(message.content)
         print('sentiment: ' + str(sentiment))
         await message.channel.send('The sentiment of your text is ' + str(sentiment))
 
