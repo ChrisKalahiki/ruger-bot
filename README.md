@@ -8,7 +8,5 @@ My personal discord bot
 
 ## Commands
 * _quote_: spits out a ramdom quote from the series Rick & Morty
+* _trump poll_: checks twitter for recent tweets containing "Donald Trump" and gives sentiment analysis scores
 * By default, the bot will return a sentimant level of any message that is sent in the server that HAL resides in
-
-## Bonus
-* Run `node bot.js` to use the basic JS bot that I wrote earlier
