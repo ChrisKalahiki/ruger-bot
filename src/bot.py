@@ -129,7 +129,7 @@ async def on_message(message):
         print('checking twitter')
         await message.channel.send(poll(message.content, 25))
     else:
-        sentiment = sentiment_analyzer_scores(message.content)
+        sentiment = sentiment_analyzer_scores(message.content.split(' ', 2)[2])
         print('sentiment: ' + str(sentiment))
         await message.channel.send('The sentiment of your text is ' + str(sentiment))
 
