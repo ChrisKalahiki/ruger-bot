@@ -30,7 +30,7 @@ class TwitterClient(object):
 	def clean_tweet(self, tweet):
 		return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split()) 
 
-	def get_tweets(self, query, count = 10):
+	def get_tweets(self, query, count = 25):
 		tweets = [] 
 
 		try:
@@ -53,13 +53,15 @@ class TwitterClient(object):
 			print("Error : " + str(e)) 
 
 def main():
+	query = input('What should I query? ')
+	count = input('How many tweets should I search? ')
 	api = TwitterClient()
-	tweets = api.get_tweets(query = 'Donald Trump', count = 500) 
+	tweets = api.get_tweets(query, count) 
 
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
 	ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
 
-	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
+	print("\nPositive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
 	print("Neutral tweets percentage: {} %".format(100*((len(tweets) - len(ntweets) - len(ptweets))/len(tweets))))
 	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
 

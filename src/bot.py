@@ -67,7 +67,7 @@ class TwitterClient(object):
 	def clean_tweet(self, tweet):
 		return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split()) 
 
-	def get_tweets(self, query, count = 10):
+	def get_tweets(self, query, count):
 		tweets = [] 
 		try:
 			fetched_tweets = self.api.search(q = query, count = count) 
@@ -83,15 +83,6 @@ class TwitterClient(object):
 			return tweets 
 		except tweepy.TweepError as e:
 			print("Error : " + str(e)) 
-
-def main():
-	api = TwitterClient()
-	tweets = api.get_tweets(query = 'Donald Trump', count = 500) 
-	ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
-	ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
-	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
-	print("Neutral tweets percentage: {} %".format(100*((len(tweets) - len(ntweets) - len(ptweets))/len(tweets))))
-	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
 
 # create discord client
 client = discord.Client()
@@ -114,9 +105,9 @@ def sentiment_analyzer_scores(text):
 def random_quote():
     return quotes[random.randint(1,len(quotes)) % len(quotes)]
 
-def trump_poll():
+def poll(query, count = 25):
 	api = TwitterClient()
-	tweets = api.get_tweets(query = 'Donald Trump', count = 500) 
+	tweets = api.get_tweets(query, count) 
 	ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
 	ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
 	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
@@ -134,9 +125,9 @@ async def on_message(message):
     if message.content.startswith('quote'):
         print('quote is firing')
         await message.channel.send(random_quote())
-    elif message.content.startswith('trump poll'):
+    elif message.content.startswith('check twitter'):
         print('checking twitter')
-        await message.channel.send(trump_poll())
+        await message.channel.send(poll(message.content, 25))
     else:
         sentiment = sentiment_analyzer_scores(message.content)
         print('sentiment: ' + str(sentiment))
