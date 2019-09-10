@@ -106,13 +106,15 @@ def random_quote():
     return quotes[random.randint(1,len(quotes)) % len(quotes)]
 
 def poll(query, count = 25):
-	api = TwitterClient()
-	tweets = api.get_tweets(query, count) 
-	ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
-	ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
-	print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
-	print("Neutral tweets percentage: {} %".format(100*((len(tweets) - len(ntweets) - len(ptweets))/len(tweets))))
-	print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
+    api = TwitterClient()
+    tweets = api.get_tweets(query, count) 
+    ptweets = [tweet for tweet in tweets if tweet['sentiment'] >= 0.05]
+    ntweets = [tweet for tweet in tweets if tweet['sentiment'] <= -0.05]
+    a = ("Positive tweets percentage: {} %\n".format(100*len(ptweets)/len(tweets)))
+    b = ("Neutral tweets percentage: {} %\n".format(100*((len(tweets) - len(ntweets) - len(ptweets))/len(tweets))))
+    c = ("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
+    return a + b + c
+    
 
 @client.event
 async def on_ready():
@@ -125,10 +127,17 @@ async def on_message(message):
     if message.content.startswith('quote'):
         print('quote is firing')
         await message.channel.send(random_quote())
-    elif message.content.startswith('check twitter'):
+    elif message.content.startswith('poll'):
         print('checking twitter')
-        print(poll(message.content.split(' ', 2)[2], 25))
-        await message.channel.send(poll(message.content.split(' ', 2)[2], 25))
+        try:
+            results = poll(message.content.split(' ', 2)[2], message.content.split(' ', 2)[1])
+        except IndexError:
+            try:
+                results = poll(message.content.split(' ', 2)[1])
+            except IndexError as e:
+                print('Error: ' + str(e))
+                results = 'Try adding a query after the poll command.'
+        await message.channel.send(results)
     else:
         sentiment = sentiment_analyzer_scores(message.content)
         print('sentiment: ' + str(sentiment))
