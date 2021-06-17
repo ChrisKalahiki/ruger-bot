@@ -1,2 +1,3 @@
-./config.json
-./logs
+./old-files/config.json
+./logs/discord.log
+pass.json
