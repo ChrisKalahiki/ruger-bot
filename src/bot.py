@@ -2,6 +2,7 @@
 import discord, spotipy
 import asyncio, logging
 import math, random, re, json, sys
+from discord.ext import commands
 from spotipy.oauth2 import SpotifyClientCredentials
 
 
@@ -24,60 +25,85 @@ SPOTIPY_CLIENT_SECRET = d['spotify']['clientSecret']
 SPOTIPY_REDIRECT_URI = d['spotify']['redirectURI']
 
 
-''' Create Discord Client '''
-client = discord.Client()
+''' Create Discord Bot '''
+description = '''My dog Ruger as a Discord Bot.'''
+
+intents = discord.Intents.default()
+intents.members = True
+
+bot = commands.Bot(command_prefix='$', description=description, intents=intents)
+
 
 ''' Setting Up SpotiPy '''
 auth_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 spotify = spotipy.Spotify(auth_manager)
 
 
-''' Create General Methods ''' 
-def roll(sides):
-    tmp = random.randint(0, sides)
-    return tmp
+''' Create General Methods '''
+# def list_albums(url):
+#     results = spotify.artist_albums(url, album_type='album')
+#     albums = results['items']
+#     while results['next']:
+#         results = spotify.next(results)
+#         albums.extend(results['items'])
 
-def list_albums(url):
-    results = spotify.artist_albums(url, album_type='album')
-    albums = results['items']
-    while results['next']:
-        results = spotify.next(results)
-        albums.extend(results['items'])
+#     for album in albums:
+#         print(album['name'])
 
-    for album in albums:
-        print(album['name'])
+# def find_artist_url(name):
+#     if len(sys.argv) > 1:
+#         name = ' '.join(sys.argv[1:])
+#     else:
+#         name = 'Radiohead'
 
-def find_artist_url(name):
-    if len(sys.argv) > 1:
-        name = ' '.join(sys.argv[1:])
-    else:
-        name = 'Radiohead'
+#     results = spotify.search(q='artist:' + name, type='artist')
+#     items = results['artists']['items']
+#     if len(items) > 0:
+#         artist = items[0]
+#         print(artist['name'], artist['images'][0]['url'])
+#         return artist['images'][0]['url']
+#     else:
+#         return 'No artist found.'
 
-    results = spotify.search(q='artist:' + name, type='artist')
-    items = results['artists']['items']
-    if len(items) > 0:
-        artist = items[0]
-        print(artist['name'], artist['images'][0]['url'])
-        return artist['images'][0]['url']
-    else:
-        return 'No artist found.'
-
-
-''' Discord Events '''
-@client.event
+''' Discord Bot '''
+@bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print('Logged in as')
+    print(bot.user.name)
+    print(bot.user.id)
+    print('------')
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
+@bot.command()
+async def ping(ctx):
+    """Adds two numbers together."""
+    await ctx.send('pong!')
+
+
+@bot.command()
+async def joined(ctx, member: discord.Member):
+    """Says when a member joined."""
+    await ctx.send('{0.name} joined in {0.joined_at}'.format(member))
+
+@bot.command()
+async def add(ctx, left: int, right: int):
+    """Adds two numbers together."""
+    await ctx.send(left + right)
+
+@bot.command()
+async def roll(ctx, dice: str):
+    """Rolls a dice in NdN format."""
+    try:
+        rolls, limit = map(int, dice.split('d'))
+    except Exception:
+        await ctx.send('Format has to be in NdN!')
         return
-    if message.content.startswith("roll"):
-        print('rolling dice')
-        try:
-            results = roll(int(message.content.split(' ', 2)[1]))
-        except IndexError:
-            results = 'Try adding a number of sides after the roll command.'
-        await message.channel.send(results)
+    result = [random.randint(1, limit) for r in range(rolls)]
+    results = f'{ctx.author.name} :game_die:\nResults: ' + str(dice) + ' (' + ', '.join(str(i) for i in result) + ')\nTotal: ' + str(sum(result))
+    await ctx.send(results)
 
-client.run(DISCORD)
+@bot.command(description='For when you wanna settle the score some other way')
+async def choose(ctx, *choices: str):
+    """Chooses between multiple choices."""
+    await ctx.send(random.choice(choices))
+
+bot.run(DISCORD)
