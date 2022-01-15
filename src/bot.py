@@ -26,9 +26,9 @@ SPOTIPY_REDIRECT_URI = d['spotify']['redirectURI']
 
 ''' Create Discord Client '''
 client = discord.Client()
- 
+
 ''' Setting Up SpotiPy '''
-auth_manager = SpotifyClientCredentials()
+auth_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 spotify = spotipy.Spotify(auth_manager)
 
 
@@ -75,7 +75,7 @@ async def on_message(message):
     if message.content.startswith("roll"):
         print('rolling dice')
         try:
-            results = roll(message.content.split(' ', 2)[1])
+            results = roll(int(message.content.split(' ', 2)[1]))
         except IndexError:
             results = 'Try adding a number of sides after the roll command.'
     await message.channel.send(results)
