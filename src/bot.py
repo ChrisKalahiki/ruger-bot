@@ -78,6 +78,6 @@ async def on_message(message):
             results = roll(int(message.content.split(' ', 2)[1]))
         except IndexError:
             results = 'Try adding a number of sides after the roll command.'
-    await message.channel.send(results)
+        await message.channel.send(results)
 
 client.run(DISCORD)
