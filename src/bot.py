@@ -39,7 +39,7 @@ auth_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secr
 spotify = spotipy.Spotify(auth_manager)
 
 
-''' Create General Methods '''
+''' Spotipy Methods '''
 # def list_albums(url):
 #     results = spotify.artist_albums(url, album_type='album')
 #     albums = results['items']
@@ -77,7 +77,6 @@ async def on_ready():
 async def ping(ctx):
     """Adds two numbers together."""
     await ctx.send('pong!')
-
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
