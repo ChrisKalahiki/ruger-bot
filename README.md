@@ -188,7 +188,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@@ChrisKalahiki](https://twitter.com/@ChrisKalahiki) - chris.kalahiki@gmail.com
+Your Name - [@ChrisKalahiki](https://twitter.com/@ChrisKalahiki) - chris.kalahiki@gmail.com
 
 Project Link: [https://github.com/ChrisKalahiki/Da-Bot-Dot-Com](https://github.com/ChrisKalahiki/Da-Bot-Dot-Com)
 
