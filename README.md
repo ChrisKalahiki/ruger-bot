@@ -199,9 +199,7 @@ Project Link: [https://github.com/ChrisKalahiki/Da-Bot-Dot-Com](https://github.c
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+* [Chris Kalahiki](https://www.chriskalahiki.info/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
