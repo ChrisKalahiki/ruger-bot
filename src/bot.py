@@ -1,7 +1,6 @@
 ''' Import Statements '''
 import discord, spotipy
-import asyncio, logging
-import math, random, re, json, sys
+import logging, random, json, sys
 from discord.ext import commands
 from spotipy.oauth2 import SpotifyClientCredentials
 

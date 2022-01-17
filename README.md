@@ -29,7 +29,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/ChrisKalahiki/Da-Bot-Dot-Com">
+  <a href="https://github.com/ChrisKalahiki/ruger-bot">
     <img src="assets/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -38,14 +38,14 @@
   <p align="center">
     A Discord bot for use in my personal server.
     <br />
-    <a href="https://github.com/ChrisKalahiki/Da-Bot-Dot-Com"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ChrisKalahiki/ruger-bot"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/ChrisKalahiki/Da-Bot-Dot-Com">View Demo</a>
+    <a href="https://github.com/ChrisKalahiki/ruger-bot">View Demo</a>
     ·
-    <a href="https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/issues">Report Bug</a>
+    <a href="https://github.com/ChrisKalahiki/ruger-bot/issues">Report Bug</a>
     ·
-    <a href="https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/issues">Request Feature</a>
+    <a href="https://github.com/ChrisKalahiki/ruger-bot/issues">Request Feature</a>
   </p>
 </div>
 
@@ -107,27 +107,36 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+This project has a few pre-requisites before you can get up and running. They are as follows:
+1. [Docker](https://www.docker.com/)
+2. [Python 3.6+](https://www.python.org/downloads/)
+3. [Discord API Token](https://discord.com/developers/applications)
+4. [Spotify API Key](https://developer.spotify.com/dashboard/applications)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/ChrisKalahiki/Da-Bot-Dot-Com.git
+   git clone https://github.com/ChrisKalahiki/ruger-bot.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
+2. Create a JSON file called pass.json with the following contents:
+  ```{
+      "spotify":{
+          "clientID":"yourClientID",
+          "clientSecret":"yourClientSecret"",
+          "redirectURI":"yourRedirectURI"
+      },
+      "discord":"yourDiscordToken"
+  }```
+3. Create a new log file called `discord.log` in the logs directory
+4. Build the Docker image
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   docker build -t ruger-bot .
    ```
+5. Run the Docker image
+    ```
+    docker run -dp 3000:3000 ruger-bot
+    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -152,7 +161,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [] Feature 3
     - [] Nested Feature
 
-See the [open issues](https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/ChrisKalahiki/ruger-bot/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -190,7 +199,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Your Name - [@ChrisKalahiki](https://twitter.com/@ChrisKalahiki) - chris.kalahiki@gmail.com
 
-Project Link: [https://github.com/ChrisKalahiki/Da-Bot-Dot-Com](https://github.com/ChrisKalahiki/Da-Bot-Dot-Com)
+Project Link: [https://github.com/ChrisKalahiki/ruger-bot](https://github.com/ChrisKalahiki/ruger-bot)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -207,16 +216,16 @@ Project Link: [https://github.com/ChrisKalahiki/Da-Bot-Dot-Com](https://github.c
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ChrisKalahiki/Da-Bot-Dot-Com.svg?style=for-the-badge
-[contributors-url]: https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ChrisKalahiki/Da-Bot-Dot-Com.svg?style=for-the-badge
-[forks-url]: https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/network/members
-[stars-shield]: https://img.shields.io/github/stars/ChrisKalahiki/Da-Bot-Dot-Com.svg?style=for-the-badge
-[stars-url]: https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ChrisKalahiki/Da-Bot-Dot-Com.svg?style=for-the-badge
-[issues-url]: https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/issues
-[license-shield]: https://img.shields.io/github/license/ChrisKalahiki/Da-Bot-Dot-Com.svg?style=for-the-badge
-[license-url]: https://github.com/ChrisKalahiki/Da-Bot-Dot-Com/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[contributors-url]: https://github.com/ChrisKalahiki/ruger-bot/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[forks-url]: https://github.com/ChrisKalahiki/ruger-bot/network/members
+[stars-shield]: https://img.shields.io/github/stars/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[stars-url]: https://github.com/ChrisKalahiki/ruger-bot/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[issues-url]: https://github.com/ChrisKalahiki/ruger-bot/issues
+[license-shield]: https://img.shields.io/github/license/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[license-url]: https://github.com/ChrisKalahiki/ruger-bot/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/chriskalahiki
 [product-screenshot]: images/screenshot.png

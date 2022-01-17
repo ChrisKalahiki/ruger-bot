@@ -1,0 +1,3 @@
+discord
+spotipy
+nltk
