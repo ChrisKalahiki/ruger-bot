@@ -1,8 +1,12 @@
-import discord
+import discord, json
 from discord.ext import commands
 from discord_slash import cog_ext, SlashContext
 
-GUILD_ID = '418089559188832257'
+
+with open('../pass.json') as f:
+    d = json.load(f)
+
+GUILD_ID = d['guildID']
 
 class Slash(commands.Cog):
     def __init__(self, bot):
