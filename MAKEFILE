@@ -1,0 +1,7 @@
+build:
+	@docker docker build -t ruger-bot .
+
+run:
+	@docker run -dp 3000:3000 ruger-bot
+
+all: build run

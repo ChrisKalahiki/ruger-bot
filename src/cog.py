@@ -10,5 +10,9 @@ class Slash(commands.Cog):
     async def _test(self, ctx: SlashContext):
         await ctx.send("Hello World!")
 
+    @cog_ext.cog_slash(name="ping")
+    async def _ping(self, ctx: SlashContext):
+        await ctx.send("pong!")
+
 def setup(bot):
     bot.add_cog(Slash(bot))

@@ -6,12 +6,12 @@ from discord_slash import SlashCommand, SlashContext
 from spotipy.oauth2 import SpotifyClientCredentials
 
 
-''' Logging '''
-logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename='../logs/discord.log', encoding='utf-8',mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
-logger.addHandler(handler)
+''' Logging - Temporarily disabled '''
+# logger = logging.getLogger('discord')
+# logger.setLevel(logging.DEBUG)
+# handler = logging.FileHandler(filename='../logs/discord.log', encoding='utf-8',mode='w')
+# handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+# logger.addHandler(handler)
 
 
 ''' Loading Credentials '''
@@ -47,6 +47,10 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+
+@slash.slash(name="test")
+async def _test(ctx: SlashContext):
+    await ctx.send("Hello World!")
 
 @bot.command()
 async def ping(ctx):
