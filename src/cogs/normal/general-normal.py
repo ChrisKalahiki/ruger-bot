@@ -11,10 +11,10 @@ from disnake.ext.commands import Context
 
 from helpers import checks
 
-if not os.path.isfile("config.json"):
-    sys.exit("'config.json' not found! Please add it and try again.")
+if not os.path.isfile("../config.json"):
+    sys.exit("'config.json' not found by general-normal! Please add it and try again.")
 else:
-    with open("config.json") as file:
+    with open("../config.json") as file:
         config = json.load(file)
 
 
@@ -33,7 +33,7 @@ class General(commands.Cog, name="general-normal"):
         :param context: The context in which the command has been executed.
         """
         embed = disnake.Embed(
-            description="Used [Krypton's](https://krypt0n.co.uk) template",
+            description="The Ruger Discord Bot.",
             color=0x9C84EF
         )
         embed.set_author(
@@ -152,7 +152,7 @@ class General(commands.Cog, name="general-normal"):
         """
         embed = disnake.Embed(
             title="The bot has chosen:",
-            description=f"{random.choice(choices)}.",
+            description=f"{random.choice(choices)}",
             color=0x9C84EF
         )
         await context.send(embed=embed)
@@ -162,7 +162,7 @@ class General(commands.Cog, name="general-normal"):
         description="Roll NdN dice.",
     )
     @checks.not_blacklisted()
-    async def choose(self, context: Context, dice: str) -> None:
+    async def roll(self, context: Context, dice: str) -> None:
         """
         Roll NdN dice.
         :param context: The context in which the command has been executed.
@@ -175,7 +175,7 @@ class General(commands.Cog, name="general-normal"):
             return
         result = [random.randint(1, limit) for r in range(rolls)]
         embed = disnake.Embed(
-            title="{context.author.name} :game_die:",
+            title=f"{context.author.name} :game_die:",
             description=f'Results: ' + str(dice) + ' (' + ', '.join(str(i) for i in result) + ')\nTotal: ' + str(sum(result)),
             color=0x9C84EF
         )

@@ -1,6 +1,2 @@
 aiohttp
-discord
 disnake
-discord-py-slash-command
-spotipy
-nltk

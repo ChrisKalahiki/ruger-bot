@@ -12,10 +12,10 @@ from disnake.ext.commands import Bot
 from disnake.ext.commands import Context
 
 import exceptions
-import discord
-import logging
-from discord.ext import commands
-from discord_slash import SlashCommand, SlashContext
+# import discord
+# import logging
+# from discord.ext import commands
+# from discord_slash import SlashCommand, SlashContext
 
 
 ''' Logging - Temporarily disabled '''
@@ -27,10 +27,10 @@ from discord_slash import SlashCommand, SlashContext
 
 
 ''' Loading Credentials '''
-if not os.path.isfile("pass.json"):
-    sys.exit("'pass.json' not found! Please add it and try again.")
+if not os.path.isfile("../config.json"):
+    sys.exit("'config.json' not found by bot! Please add it and try again.")
 else:
-    with open("pass.json") as file:
+    with open("../config.json") as file:
         config = json.load(file)
 
 
@@ -59,6 +59,16 @@ async def status_task() -> None:
     statuses = ["with you!", "with Krypton!", "with humans!"]
     await bot.change_presence(activity=disnake.Game(random.choice(statuses)))
 
+def load_commands(command_type: str) -> None:
+    for file in os.listdir(f"./cogs/{command_type}"):
+        if file.endswith(".py"):
+            extension = file[:-3]
+            try:
+                bot.load_extension(f"cogs.{command_type}.{extension}")
+                print(f"Loaded extension '{extension}'")
+            except Exception as e:
+                exception = f"{type(e).__name__}: {e}"
+                print(f"Failed to load extension {extension}\n{exception}")
 
 if __name__ == "__main__":
     """

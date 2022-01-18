@@ -119,7 +119,7 @@ This project has a few pre-requisites before you can get up and running. They ar
    ```sh
    git clone https://github.com/ChrisKalahiki/ruger-bot.git
    ```
-2. Create a JSON file called pass.json with the following contents:
+2. Create a JSON file called config.json with the following contents:
   ```{
       "spotify":{
           "clientID":"yourClientID",

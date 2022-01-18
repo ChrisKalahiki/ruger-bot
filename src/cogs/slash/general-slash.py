@@ -11,10 +11,10 @@ from disnake.ext import commands
 
 from helpers import checks
 
-if not os.path.isfile("pass.json"):
-    sys.exit("'pass.json' not found! Please add it and try again.")
+if not os.path.isfile("../config.json"):
+    sys.exit("'config.json' not found by general-slash! Please add it and try again.")
 else:
-    with open("pass.json") as file:
+    with open("../config.json") as file:
         config = json.load(file)
 
 
@@ -33,7 +33,7 @@ class General(commands.Cog, name="general-slash"):
         :param interaction: The application command interaction.
         """
         embed = disnake.Embed(
-            description="Used [Krypton's](https://krypt0n.co.uk) template",
+            description="The Ruger Discord Bot.",
             color=0x9C84EF
         )
         embed.set_author(
@@ -117,6 +117,66 @@ class General(commands.Cog, name="general-slash"):
         embed = disnake.Embed(
             title="🏓 Pong!",
             description=f"The bot latency is {round(self.bot.latency * 1000)}ms.",
+            color=0x9C84EF
+        )
+        await interaction.send(embed=embed)
+
+    @commands.command(
+        name="joined",
+        description="See when a member joined.",
+    )
+    @checks.not_blacklisted()
+    async def joined(self, interaction: ApplicationCommandInteraction, member: disnake.Member) -> None:
+        """
+        See when a member joined.
+        :param interaction: The application command interaction.
+        :param member: The member to check.
+        """
+        embed = disnake.Embed(
+            title="Member Joined",
+            description='{0.name} joined in {0.joined_at}'.format(member),
+            color=0x9C84EF
+        )
+        await interaction.send(embed=embed)
+
+    @commands.command(
+        name="choose",
+        description="Let the bot choose for you.",
+    )
+    @checks.not_blacklisted()
+    async def choose(self, interaction: ApplicationCommandInteraction, *choices: str) -> None:
+        """
+        Let the bot choose for you.
+        :param interaction: The application command interaction.
+        :param choices: The choices to choose from.
+        """
+        embed = disnake.Embed(
+            title="The bot has chosen:",
+            description=f"{random.choice(choices)}",
+            color=0x9C84EF
+        )
+        await interaction.send(embed=embed)
+
+    @commands.command(
+        name="roll",
+        description="Roll NdN dice.",
+    )
+    @checks.not_blacklisted()
+    async def roll(self, interaction: ApplicationCommandInteraction, dice: str) -> None:
+        """
+        Roll NdN dice.
+        :param interaction: The application command interaction.
+        :param dice: The number of dice to roll.
+        """
+        try:
+            rolls, limit = map(int, dice.split('d'))
+        except Exception:
+            await interaction.send('Format has to be in NdN!')
+            return
+        result = [random.randint(1, limit) for r in range(rolls)]
+        embed = disnake.Embed(
+            title=f"{interaction.author.name} :game_die:",
+            description=f'Results: ' + str(dice) + ' (' + ', '.join(str(i) for i in result) + ')\nTotal: ' + str(sum(result)),
             color=0x9C84EF
         )
         await interaction.send(embed=embed)
