@@ -1,7 +1,8 @@
 ''' Import Statements '''
-import discord, spotipy
+import discord, spotipy, nltk
 import logging, random, json, sys
 from discord.ext import commands
+from discord_slash import SlashCommand, SlashContext
 from spotipy.oauth2 import SpotifyClientCredentials
 
 
@@ -30,39 +31,14 @@ description = '''My dog Ruger as a Discord Bot.'''
 intents = discord.Intents.default()
 intents.members = True
 
-bot = commands.Bot(command_prefix='$', description=description, intents=intents)
+bot = commands.Bot(command_prefix='.', description=description, intents=intents)
+slash = SlashCommand(bot, override_type = True)
 
 
 ''' Setting Up SpotiPy '''
 auth_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 spotify = spotipy.Spotify(auth_manager)
 
-
-''' Spotipy Methods '''
-# def list_albums(url):
-#     results = spotify.artist_albums(url, album_type='album')
-#     albums = results['items']
-#     while results['next']:
-#         results = spotify.next(results)
-#         albums.extend(results['items'])
-
-#     for album in albums:
-#         print(album['name'])
-
-# def find_artist_url(name):
-#     if len(sys.argv) > 1:
-#         name = ' '.join(sys.argv[1:])
-#     else:
-#         name = 'Radiohead'
-
-#     results = spotify.search(q='artist:' + name, type='artist')
-#     items = results['artists']['items']
-#     if len(items) > 0:
-#         artist = items[0]
-#         print(artist['name'], artist['images'][0]['url'])
-#         return artist['images'][0]['url']
-#     else:
-#         return 'No artist found.'
 
 ''' Discord Bot '''
 @bot.event
@@ -103,5 +79,7 @@ async def roll(ctx, dice: str):
 async def choose(ctx, *choices: str):
     """Chooses between multiple choices."""
     await ctx.send(random.choice(choices))
+
+bot.load_extension("cog")
 
 bot.run(DISCORD)
