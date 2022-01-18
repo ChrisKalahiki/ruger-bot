@@ -3,7 +3,6 @@ import discord, spotipy, nltk
 import logging, random, json, sys
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext
-from spotipy.oauth2 import SpotifyClientCredentials
 
 
 ''' Logging - Temporarily disabled '''
@@ -20,24 +19,11 @@ with open('../pass.json') as f:
 
 DISCORD = d['discord']
 
-SPOTIPY_CLIENT_ID = d['spotify']['clientID']
-SPOTIPY_CLIENT_SECRET = d['spotify']['clientSecret']
-SPOTIPY_REDIRECT_URI = d['spotify']['redirectURI']
-
 
 ''' Create Discord Bot '''
 description = '''My dog Ruger as a Discord Bot.'''
-
-intents = discord.Intents.default()
-intents.members = True
-
 bot = commands.Bot(command_prefix='.', description=description, intents=discord.Intents.all())
 slash = SlashCommand(bot, override_type = True)
-
-
-''' Setting Up SpotiPy '''
-auth_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
-spotify = spotipy.Spotify(auth_manager)
 
 
 ''' Discord Bot '''
