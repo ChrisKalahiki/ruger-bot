@@ -31,7 +31,7 @@ description = '''My dog Ruger as a Discord Bot.'''
 intents = discord.Intents.default()
 intents.members = True
 
-bot = commands.Bot(command_prefix='.', description=description, intents=intents)
+bot = commands.Bot(command_prefix='.', description=description, intents=discord.Intents.all())
 slash = SlashCommand(bot, override_type = True)
 
 
@@ -47,10 +47,6 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-
-@slash.slash(name="test")
-async def _test(ctx: SlashContext):
-    await ctx.send("Hello World!")
 
 @bot.command()
 async def ping(ctx):
