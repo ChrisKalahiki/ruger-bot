@@ -314,6 +314,35 @@ class Moderation(commands.Cog, name="moderation-slash"):
             await interaction.send(embed=embed)
             print(e)
 
+    @commands.slash_command(
+        name="newrole",
+        description="Creates a new role."
+    )
+    @commands.has_guild_permissions(manage_channels=True)
+    @checks.not_blacklisted()
+    async def newrole(self, interaction: ApplicationCommandInteraction, *, name: str) -> None:
+        """
+        Creates a new role.
+        :param interaction: The application command interaction.
+        :param name: The name of the role.
+        """
+        try:
+            await interaction.guild.create_role(name=name)
+            embed = disnake.Embed(
+                title="Role Created!",
+                description=f"**{role_name.content}** was created by **{interaction.author}**!",
+                color=0x9C84EF
+            )
+            await interaction.send(embed=embed)
+        except Exception as e:
+            embed = disnake.Embed(
+                title="Error!",
+                description="An error occurred while trying to create the role.",
+                color=0xE02B2B
+            )
+            await interaction.send(embed=embed)
+            print(e)
+
 
 def setup(bot):
     bot.add_cog(Moderation(bot))

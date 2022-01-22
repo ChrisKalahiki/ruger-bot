@@ -241,6 +241,34 @@ class Moderation(commands.Cog, name="moderation-normal"):
             )
             await context.send(embed=embed)
 
+    @commands.command(
+        name="newrole",
+        description="Creates a new role."
+    )
+    @commands.has_guild_permissions(manage_channels=True)
+    @checks.not_blacklisted()
+    async def newrole(self, context: Context, *, name: str) -> None:
+        """
+        Creates a new role.
+        :param context: The context in which the command has been executed.
+        :param name: The name of the role.
+        """
+        try:
+            await context.guild.create_role(name=name)
+            embed = disnake.Embed(
+                title="Role Created!",
+                description=f"**{name}** was created by **{context.author}**!",
+                color=0x9C84EF
+            )
+            await context.send(embed=embed)
+        except:
+            embed = disnake.Embed(
+                title="Error!",
+                description="An error occurred while trying to create the role.",
+                color=0xE02B2B
+            )
+            await context.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
