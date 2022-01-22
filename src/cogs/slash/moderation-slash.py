@@ -334,14 +334,13 @@ class Moderation(commands.Cog, name="moderation-slash"):
                 color=0x9C84EF
             )
             await interaction.send(embed=embed)
-        except Exception as e:
+        except:
             embed = disnake.Embed(
                 title="Error!",
                 description="An error occurred while trying to create the role.",
                 color=0xE02B2B
             )
             await interaction.send(embed=embed)
-            print(e)
 
 
 def setup(bot):
