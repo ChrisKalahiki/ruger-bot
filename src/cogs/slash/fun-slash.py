@@ -10,10 +10,10 @@ from disnake.ext import commands
 
 from helpers import checks
 
-if not os.path.isfile("config.json"):
-    sys.exit("'config.json' not found! Please add it and try again.")
+if not os.path.isfile("../config.json"):
+    sys.exit("'config.json' not found by general-normal! Please add it and try again.")
 else:
-    with open("config.json") as file:
+    with open("../config.json") as file:
         config = json.load(file)
 
 
