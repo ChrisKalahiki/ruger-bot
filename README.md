@@ -133,13 +133,9 @@ This project has a few pre-requisites before you can get up and running. They ar
   }
   ```
 3. Create a new log file called `discord.log` in the logs directory
-4. Build the Docker image
+4. Build and run the Docker image.
   ```sh
-  docker build -t ruger-bot .
-  ```
-5. Run the Docker image
-  ```sh
-  docker run -dp 3000:3000 ruger-bot
+  make all
   ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
