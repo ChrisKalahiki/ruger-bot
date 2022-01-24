@@ -145,9 +145,11 @@ This project has a few pre-requisites before you can get up and running. They ar
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+COMING SOON!!!
+
+<!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -156,10 +158,12 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Feature 1
-- [] Feature 2
-- [] Feature 3
-    - [] Nested Feature
+- [] Role Management
+- [] Revamped Logging
+- [] TCG Card Searching
+    - [] MTG Card Searching (via Scryfall)
+    - [] Pokemon Card Searching (via PokeAPI)
+    - [] Yugioh Card Searching (via YugiohDB)
 
 See the [open issues](https://github.com/ChrisKalahiki/ruger-bot/issues) for a full list of proposed features (and known issues).
 
@@ -197,7 +201,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@ChrisKalahiki](https://twitter.com/@ChrisKalahiki) - chris.kalahiki@gmail.com
+Chris Kalahiki - [@ChrisKalahiki](https://twitter.com/@ChrisKalahiki) - chris.kalahiki@gmail.com
 
 Project Link: [https://github.com/ChrisKalahiki/ruger-bot](https://github.com/ChrisKalahiki/ruger-bot)
 
