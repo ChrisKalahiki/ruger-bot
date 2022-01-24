@@ -127,7 +127,9 @@ This project has a few pre-requisites before you can get up and running. They ar
           "clientSecret":"yourClientSecret",
           "redirectURI":"yourRedirectURI"
       },
-      "discord":"yourDiscordToken"
+      "discord":"yourDiscordToken",
+      "guildID":"yourGuildID",
+      "prefix":"."
   }
   ```
 3. Create a new log file called `discord.log` in the logs directory
