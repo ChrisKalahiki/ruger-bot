@@ -110,8 +110,9 @@ To get a local copy up and running follow these simple example steps.
 This project has a few pre-requisites before you can get up and running. They are as follows:
 1. [Docker](https://www.docker.com/)
 2. [Python 3.6+](https://www.python.org/downloads/)
-3. [Discord API Token](https://discord.com/developers/applications)
-4. [Spotify API Key](https://developer.spotify.com/dashboard/applications)
+3. [Make](https://www.gnu.org/software/make/)
+4. [Discord API Token](https://discord.com/developers/applications)
+5. [Spotify API Key](https://developer.spotify.com/dashboard/applications)
 
 ### Installation
 
@@ -119,7 +120,11 @@ This project has a few pre-requisites before you can get up and running. They ar
   ```sh
   git clone https://github.com/ChrisKalahiki/ruger-bot.git
   ```
-2. Create a JSON file called config.json with the following contents:
+2. Enter the cloned directory
+  ```sh
+  cd ruger-bot
+  ```
+3. Create a JSON file called config.json with the following contents:
   ```json
   {
       "spotify":{
@@ -132,8 +137,8 @@ This project has a few pre-requisites before you can get up and running. They ar
       "prefix":"."
   }
   ```
-3. Create a new log file called `discord.log` in the logs directory
-4. Build and run the Docker image.
+4. Create a new directory called logs and add a log file called `discord.log` inside of it.
+5. Build and run the Docker image.
   ```sh
   make all
   ```
