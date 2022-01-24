@@ -116,27 +116,29 @@ This project has a few pre-requisites before you can get up and running. They ar
 ### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/ChrisKalahiki/ruger-bot.git
-   ```
+  ```sh
+  git clone https://github.com/ChrisKalahiki/ruger-bot.git
+  ```
 2. Create a JSON file called config.json with the following contents:
-  ```{
+  ```json
+  {
       "spotify":{
           "clientID":"yourClientID",
           "clientSecret":"yourClientSecret"",
           "redirectURI":"yourRedirectURI"
       },
       "discord":"yourDiscordToken"
-  }```
+  }
+  ```
 3. Create a new log file called `discord.log` in the logs directory
 4. Build the Docker image
-   ```
-   docker build -t ruger-bot .
-   ```
+  ```sh
+  docker build -t ruger-bot .
+  ```
 5. Run the Docker image
-    ```
-    docker run -dp 3000:3000 ruger-bot
-    ```
+  ```sh
+  docker run -dp 3000:3000 ruger-bot
+  ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
