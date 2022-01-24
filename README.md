@@ -124,7 +124,7 @@ This project has a few pre-requisites before you can get up and running. They ar
   {
       "spotify":{
           "clientID":"yourClientID",
-          "clientSecret":"yourClientSecret"",
+          "clientSecret":"yourClientSecret",
           "redirectURI":"yourRedirectURI"
       },
       "discord":"yourDiscordToken"
