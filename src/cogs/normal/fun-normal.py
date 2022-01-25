@@ -172,11 +172,11 @@ class Fun(commands.Cog, name="fun-normal"):
         await context.send("Please make your choice", view=view)
 
     @commands.command(
-        name="search-mtg",
+        name="mtg",
         description="Search for a card in MTG."
     )
     @checks.not_blacklisted()
-    async def search_mtg(self, context: Context, *, query: str) -> None:
+    async def mtg(self, context: Context, *, query: str) -> None:
         """
         Search for a card in MTG.
         :param context: The context in which the command has been executed.
@@ -189,6 +189,7 @@ class Fun(commands.Cog, name="fun-normal"):
                     embed = disnake.Embed(
                         title=data["name"],
                         description=data["oracle_text"],
+                        price=data["prices"]["usd"],
                         color=0x9C84EF
                     )
                     embed.set_image(url=data["image_uris"]["normal"])
@@ -201,11 +202,11 @@ class Fun(commands.Cog, name="fun-normal"):
                 await context.send(embed=embed)
 
     @commands.command(
-        name="search-pokemon",
+        name="pokemon",
         description="Search for a pokemon."
     )
     @checks.not_blacklisted()
-    async def search_pokemon(self, context: Context, *, query: str) -> None:
+    async def pokemon(self, context: Context, *, query: str) -> None:
         """
         Search for a pokemon.
         :param context: The context in which the command has been executed.
@@ -230,11 +231,11 @@ class Fun(commands.Cog, name="fun-normal"):
                 await context.send(embed=embed)
 
     @commands.command(
-        name="search-anime",
+        name="anime",
         description="Search for an anime."
     )
     @checks.not_blacklisted()
-    async def search_anime(self, context: Context, *, query: str) -> None:
+    async def anime(self, context: Context, *, query: str) -> None:
         """
         Search for an anime.
         :param context: The context in which the command has been executed.
@@ -259,11 +260,11 @@ class Fun(commands.Cog, name="fun-normal"):
                 await context.send(embed=embed)
 
     @commands.command(
-        name="search-manga",
+        name="manga",
         description="Search for a manga."
     )
     @checks.not_blacklisted()
-    async def search_manga(self, context: Context, *, query: str) -> None:
+    async def manga(self, context: Context, *, query: str) -> None:
         """
         Search for a manga.
         :param context: The context in which the command has been executed.

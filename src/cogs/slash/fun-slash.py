@@ -172,11 +172,11 @@ class Fun(commands.Cog, name="fun-slash"):
         await interaction.send("Please make your choice", view=view)
 
     @commands.slash_command(
-        name="search-mtg",
+        name="mtg",
         description="Search for a card in MTG."
     )
     @checks.not_blacklisted()
-    async def search_mtg(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
+    async def mtg(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
         """
         Search for a card in MTG.
         :param interaction: The application command interaction.
@@ -190,6 +190,7 @@ class Fun(commands.Cog, name="fun-slash"):
                     embed = disnake.Embed(
                         title=data["name"],
                         description=data["oracle_text"],
+                        price=data["prices"]["usd"],
                         color=0x9C84EF
                     )
                     embed.set_image(url=data["image_uris"]["normal"])
@@ -202,11 +203,11 @@ class Fun(commands.Cog, name="fun-slash"):
                 await interaction.send(embed=embed)
 
     @commands.slash_command(
-        name="search-pokemon",
+        name="pokemon",
         description="Search for a pokemon."
     )
     @checks.not_blacklisted()
-    async def search_pokemon(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
+    async def pokemon(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
         """
         Search for a pokemon.
         :param interaction: The application command interaction.
@@ -231,11 +232,11 @@ class Fun(commands.Cog, name="fun-slash"):
                 await interaction.send(embed=embed)
 
     @commands.slash_command(
-        name="search-anime",
+        name="anime",
         description="Search for an anime."
     )
     @checks.not_blacklisted()
-    async def search_anime(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
+    async def anime(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
         """
         Search for an anime.
         :param interaction: The application command interaction.
@@ -260,11 +261,11 @@ class Fun(commands.Cog, name="fun-slash"):
                 await interaction.send(embed=embed)
     
     @commands.slash_command(
-        name="search-manga",
+        name="manga",
         description="Search for a manga."
     )
     @checks.not_blacklisted()
-    async def search_manga(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
+    async def manga(self, interaction: ApplicationCommandInteraction, *, query: str) -> None:
         """
         Search for a manga.
         :param interaction: The application command interaction.
