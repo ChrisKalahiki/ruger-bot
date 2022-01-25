@@ -180,17 +180,17 @@ class Fun(commands.Cog, name="fun-slash"):
         """
         Search for a card in MTG.
         :param interaction: The application command interaction.
-        
         :param query: The query to search for.
         """
         async with aiohttp.ClientSession() as session:
             async with session.get(f"https://api.scryfall.com/cards/named?fuzzy={query}") as request:
                 if request.status == 200:
                     data = await request.json()
+                    description = f"Set: {data['set_name']}\nPrice: ${data['prices']['usd']}"
                     embed = disnake.Embed(
                         title=data["name"],
-                        description=data["oracle_text"],
-                        price=data["prices"]["usd"],
+                        description=description,
+                        url=data["scryfall_uri"],
                         color=0x9C84EF
                     )
                     embed.set_image(url=data["image_uris"]["normal"])
