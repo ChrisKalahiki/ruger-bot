@@ -38,7 +38,7 @@
   <p align="center">
     A Discord bot for use in my personal server.
     <br />
-    <a href="https://github.com/ChrisKalahiki/ruger-bot"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ChrisKalahiki/ruger-bot/wiki"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/ChrisKalahiki/ruger-bot">View Demo</a>
