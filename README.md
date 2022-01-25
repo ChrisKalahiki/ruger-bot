@@ -164,11 +164,13 @@ COMING SOON!!!
 ## Roadmap
 
 - [ ] Role Management
-- [ ] Revamped Logging
+- [X] Revamped Logging
 - [ ] Stardew Valley Integration
-- [ ] TCG Card Searching
-    - [ ] MTG Card Searching (via Scryfall)
-    - [ ] Pokemon Card Searching (via PokeAPI)
+- [ ] API Searching
+    - [X] MTG Card Searching (via Scryfall)
+    - [X] Pokemon Searching (via PokeAPI)
+    - [X] Anime Searching (via Jikan)
+    - [X] Manga Searching (via Jikan)
     - [ ] Yugioh Card Searching (via YugiohDB)
 
 See the [open issues](https://github.com/ChrisKalahiki/ruger-bot/issues) for a full list of proposed features (and known issues).
