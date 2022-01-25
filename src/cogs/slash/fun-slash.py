@@ -186,7 +186,9 @@ class Fun(commands.Cog, name="fun-slash"):
             async with session.get(f"https://api.scryfall.com/cards/named?fuzzy={query}") as request:
                 if request.status == 200:
                     data = await request.json()
-                    description = f"Set: {data['set_name']}\nPrice: ${data['prices']['usd']}"
+                    description = ""
+                    if data['set_name'] != None: description = description + f"Set: {data['set_name']}"
+                    if data['prices']['usd'] != None: description = description + f"\nPrice: ${data['prices']['usd']}"
                     embed = disnake.Embed(
                         title=data["name"],
                         description=description,
@@ -214,6 +216,7 @@ class Fun(commands.Cog, name="fun-slash"):
         :param query: The query to search for.
         """
         async with aiohttp.ClientSession() as session:
+            query = query.lower()
             async with session.get(f"https://pokeapi.co/api/v2/pokemon/{query}") as request:
                 if request.status == 200:
                     data = await request.json()
