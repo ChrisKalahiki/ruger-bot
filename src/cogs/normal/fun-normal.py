@@ -171,6 +171,121 @@ class Fun(commands.Cog, name="fun-normal"):
         view = RockPaperScissorsView()
         await context.send("Please make your choice", view=view)
 
+    @commands.command(
+        name="search-mtg",
+        description="Search for a card in MTG."
+    )
+    @checks.not_blacklisted()
+    async def search_mtg(self, context: Context, *, query: str) -> None:
+        """
+        Search for a card in MTG.
+        :param context: The context in which the command has been executed.
+        :param query: The query to search for.
+        """
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"https://api.scryfall.com/cards/named?fuzzy={query}") as request:
+                if request.status == 200:
+                    data = await request.json()
+                    embed = disnake.Embed(
+                        title=data["name"],
+                        description=data["oracle_text"],
+                        color=0x9C84EF
+                    )
+                    embed.set_image(url=data["image_uris"]["normal"])
+                else:
+                    embed = disnake.Embed(
+                        title="Error!",
+                        description="There is something wrong with the API, please try again later",
+                        color=0xE02B2B
+                    )
+                await context.send(embed=embed)
+
+    @commands.command(
+        name="search-pokemon",
+        description="Search for a pokemon."
+    )
+    @checks.not_blacklisted()
+    async def search_pokemon(self, context: Context, *, query: str) -> None:
+        """
+        Search for a pokemon.
+        :param context: The context in which the command has been executed.
+        :param query: The query to search for.
+        """
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"https://pokeapi.co/api/v2/pokemon/{query}") as request:
+                if request.status == 200:
+                    data = await request.json()
+                    embed = disnake.Embed(
+                        title=data["name"],
+                        description=data["types"][0]["type"]["name"],
+                        color=0x9C84EF
+                    )
+                    embed.set_image(url=data["sprites"]["front_default"])
+                else:
+                    embed = disnake.Embed(
+                        title="Error!",
+                        description="There is something wrong with the API, please try again later",
+                        color=0xE02B2B
+                    )
+                await context.send(embed=embed)
+
+    @commands.command(
+        name="search-anime",
+        description="Search for an anime."
+    )
+    @checks.not_blacklisted()
+    async def search_anime(self, context: Context, *, query: str) -> None:
+        """
+        Search for an anime.
+        :param context: The context in which the command has been executed.
+        :param query: The query to search for.
+        """
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"https://api.jikan.moe/v3/search/anime?q={query}") as request:
+                if request.status == 200:
+                    data = await request.json()
+                    embed = disnake.Embed(
+                        title=data["results"][0]["title"],
+                        description=data["results"][0]["synopsis"],
+                        color=0x9C84EF
+                    )
+                    embed.set_image(url=data["results"][0]["image_url"])
+                else:
+                    embed = disnake.Embed(
+                        title="Error!",
+                        description="There is something wrong with the API, please try again later",
+                        color=0xE02B2B
+                    )
+                await context.send(embed=embed)
+
+    @commands.command(
+        name="search-manga",
+        description="Search for a manga."
+    )
+    @checks.not_blacklisted()
+    async def search_manga(self, context: Context, *, query: str) -> None:
+        """
+        Search for a manga.
+        :param context: The context in which the command has been executed.
+        :param query: The query to search for.
+        """
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"https://api.jikan.moe/v3/search/manga?q={query}") as request:
+                if request.status == 200:
+                    data = await request.json()
+                    embed = disnake.Embed(
+                        title=data["results"][0]["title"],
+                        description=data["results"][0]["synopsis"],
+                        color=0x9C84EF
+                    )
+                    embed.set_image(url=data["results"][0]["image_url"])
+                else:
+                    embed = disnake.Embed(
+                        title="Error!",
+                        description="There is something wrong with the API, please try again later",
+                        color=0xE02B2B
+                    )
+                await context.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(Fun(bot))
