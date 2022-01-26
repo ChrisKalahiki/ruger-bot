@@ -67,6 +67,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
                     name="Reason:",
                     value=reason
                 )
+                logging.info(f"{member} was kicked by {interaction.author} for {reason}!")
                 await interaction.send(embed=embed)
                 try:
                     await member.send(
@@ -119,6 +120,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
                 description=f"**{member}'s** new nickname is **{nickname}**!",
                 color=0x9C84EF
             )
+            logging.info(f"{member}'s new nickname is {nickname} by {interaction.author}!")
             await interaction.send(embed=embed)
         except:
             embed = disnake.Embed(
@@ -175,6 +177,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
                     name="Reason:",
                     value=reason
                 )
+                logging.info(f"{member} was banned by {interaction.author} for {reason}!")
                 await interaction.send(embed=embed)
                 try:
                     await member.send(f"You were banned by **{interaction.author}**!\nReason: {reason}")
@@ -228,6 +231,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
             name="Reason:",
             value=reason
         )
+        logging.info(f"{member} was warned by {interaction.author} for {reason}!")
         await interaction.send(embed=embed)
         try:
             await member.send(f"You were warned by **{interaction.author}**!\nReason: {reason}")
@@ -263,6 +267,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
             description=f"**{interaction.author}** cleared **{len(purged_messages)}** messages!",
             color=0x9C84EF
         )
+        logging.info(f"{interaction.author} cleared {len(purged_messages)} messages!")
         await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -305,6 +310,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
                 name="Reason:",
                 value=reason
             )
+            logging.info(f"{user} (ID: {user_id}) was banned by {interaction.author} for {reason}!")
             await interaction.send(embed=embed)
         except Exception as e:
             embed = disnake.Embed(
@@ -334,6 +340,7 @@ class Moderation(commands.Cog, name="moderation-slash"):
                 description=f"**{role_name.content}** was created by **{interaction.author}**!",
                 color=0x9C84EF
             )
+            logging.info(f"{role_name.content} was created by {interaction.author}!")
             await interaction.send(embed=embed)
         except:
             embed = disnake.Embed(
