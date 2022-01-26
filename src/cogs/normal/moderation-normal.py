@@ -17,7 +17,7 @@ else:
 
 ''' Logging '''
 logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename='../logs/discord.log', encoding='utf-8',mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
@@ -58,7 +58,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
                     name="Reason:",
                     value=reason
                 )
-                logging.info(f"{member} was kicked by {context.author} for {reason}!")
+                logger.info(f"{member} was kicked by {context.author} for {reason}!")
                 await context.send(embed=embed)
                 try:
                     await member.send(
@@ -96,7 +96,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
                 description=f"**{member}'s** new nickname is **{nickname}**!",
                 color=0x9C84EF
             )
-            logging.info(f"{member}'s nickname was changed to {nickname} by {context.author}!")
+            logger.info(f"{member}'s nickname was changed to {nickname} by {context.author}!")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(
@@ -137,7 +137,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
                     name="Reason:",
                     value=reason
                 )
-                logging.info(f"{member} was banned by {context.author} for {reason}!")
+                logger.info(f"{member} was banned by {context.author} for {reason}!")
                 await context.send(embed=embed)
                 try:
                     await member.send(f"You were banned by **{context.author}**!\nReason: {reason}")
@@ -175,7 +175,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
             name="Reason:",
             value=reason
         )
-        logging.info(f"{member} was warned by {context.author} for {reason}!")
+        logger.info(f"{member} was warned by {context.author} for {reason}!")
         await context.send(embed=embed)
         try:
             await member.send(f"You were warned by **{context.author}**!\nReason: {reason}")
@@ -219,7 +219,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
             description=f"**{context.author}** cleared **{len(purged_messages)}** messages!",
             color=0x9C84EF
         )
-        logging.info(f"{context.author} cleared {len(purged_messages)} messages!")
+        logger.info(f"{context.author} cleared {len(purged_messages)} messages!")
         await context.send(embed=embed)
 
     @commands.command(
@@ -245,7 +245,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
                 name="Reason:",
                 value=reason
             )
-            logging.info(f"{user} (ID: {user_id}) was banned by {context.author} for {reason}!")
+            logger.info(f"{user} (ID: {user_id}) was banned by {context.author} for {reason}!")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(
@@ -274,7 +274,7 @@ class Moderation(commands.Cog, name="moderation-normal"):
                 description=f"**{name}** was created by **{context.author}**!",
                 color=0x9C84EF
             )
-            logging.info(f"{name} was created by {context.author}!")
+            logger.info(f"{name} was created by {context.author}!")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(

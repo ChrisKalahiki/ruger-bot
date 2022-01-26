@@ -17,7 +17,7 @@ else:
 
 ''' Logging '''
 logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename='../logs/discord.log', encoding='utf-8',mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
@@ -39,7 +39,7 @@ class Owner(commands.Cog, name="owner-normal"):
             description="Shutting down. Bye! :wave:",
             color=0x9C84EF
         )
-        logging.info(f"Shutting down. Bye! :wave:")
+        logger.info(f"Shutting down. Bye! :wave:")
         await context.send(embed=embed)
         await self.bot.close()
 
@@ -52,7 +52,7 @@ class Owner(commands.Cog, name="owner-normal"):
         """
         The bot will say anything you want.
         """
-        logging.info(f"Saying '{message}'")
+        logger.info(f"Saying '{message}'")
         await context.send(message)
 
     @commands.command(
@@ -68,7 +68,7 @@ class Owner(commands.Cog, name="owner-normal"):
             description=message,
             color=0x9C84EF
         )
-        logging.info(f"Saying '{message}'")
+        logger.info(f"Saying '{message}'")
         await context.send(embed=embed)
 
     @commands.group(
@@ -117,7 +117,7 @@ class Owner(commands.Cog, name="owner-normal"):
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
             )
-            logging.info(f"{member.name} has been added to the blacklist.")
+            logger.info(f"{member.name} has been added to the blacklist.")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(
@@ -147,7 +147,7 @@ class Owner(commands.Cog, name="owner-normal"):
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
             )
-            logging.info(f"{member.name} has been removed from the blacklist.")
+            logger.info(f"{member.name} has been removed from the blacklist.")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(
