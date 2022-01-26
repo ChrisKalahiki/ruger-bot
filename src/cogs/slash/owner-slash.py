@@ -7,6 +7,7 @@ from disnake import ApplicationCommandInteraction, Option, OptionType
 from disnake.ext import commands
 
 from helpers import json_manager, checks
+import logging
 
 if not os.path.isfile("../config.json"):
     sys.exit("'config.json' not found by general-normal! Please add it and try again.")
@@ -33,6 +34,7 @@ class Owner(commands.Cog, name="owner-slash"):
             description="Shutting down. Bye! :wave:",
             color=0x9C84EF
         )
+        logging.info(f"Shutting down. Bye! :wave:")
         await interaction.send(embed=embed)
         await self.bot.close()
 
@@ -55,6 +57,7 @@ class Owner(commands.Cog, name="owner-slash"):
         :param interaction: The application command interaction.
         :param message: The message that should be repeated by the bot.
         """
+        logging.info(f"Saying '{message}'")
         await interaction.send(message)
 
     @commands.slash_command(
@@ -80,6 +83,7 @@ class Owner(commands.Cog, name="owner-slash"):
             description=message,
             color=0x9C84EF
         )
+        logging.info(f"Saying '{message}'")
         await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -136,6 +140,7 @@ class Owner(commands.Cog, name="owner-slash"):
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
             )
+            logging.info(f"{user.name} has been added to the blacklist")
             await interaction.send(embed=embed)
         except Exception as exception:
             embed = disnake.Embed(
@@ -178,6 +183,7 @@ class Owner(commands.Cog, name="owner-slash"):
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
             )
+            logging.info(f"{user.name} has been removed from the blacklist")
             await interaction.send(embed=embed)
         except ValueError:
             embed = disnake.Embed(

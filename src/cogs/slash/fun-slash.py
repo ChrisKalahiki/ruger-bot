@@ -9,6 +9,7 @@ from disnake import ApplicationCommandInteraction
 from disnake.ext import commands
 
 from helpers import checks
+import logging
 
 if not os.path.isfile("../config.json"):
     sys.exit("'config.json' not found by general-normal! Please add it and try again.")

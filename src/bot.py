@@ -15,7 +15,7 @@ import exceptions
 import logging
 
 
-''' Logging - Temporarily disabled '''
+''' Logging '''
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='../logs/discord.log', encoding='utf-8',mode='w')

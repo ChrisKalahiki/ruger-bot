@@ -7,6 +7,7 @@ from disnake.ext import commands
 from disnake.ext.commands import Context
 
 from helpers import json_manager, checks
+import logging
 
 if not os.path.isfile("../config.json"):
     sys.exit("'config.json' not found by general-normal! Please add it and try again.")
@@ -32,6 +33,7 @@ class Owner(commands.Cog, name="owner-normal"):
             description="Shutting down. Bye! :wave:",
             color=0x9C84EF
         )
+        logging.info(f"Shutting down. Bye! :wave:")
         await context.send(embed=embed)
         await self.bot.close()
 
@@ -44,6 +46,7 @@ class Owner(commands.Cog, name="owner-normal"):
         """
         The bot will say anything you want.
         """
+        logging.info(f"Saying '{message}'")
         await context.send(message)
 
     @commands.command(
@@ -59,6 +62,7 @@ class Owner(commands.Cog, name="owner-normal"):
             description=message,
             color=0x9C84EF
         )
+        logging.info(f"Saying '{message}'")
         await context.send(embed=embed)
 
     @commands.group(
@@ -107,6 +111,7 @@ class Owner(commands.Cog, name="owner-normal"):
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
             )
+            logging.info(f"{member.name} has been added to the blacklist.")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(
@@ -136,6 +141,7 @@ class Owner(commands.Cog, name="owner-normal"):
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
             )
+            logging.info(f"{member.name} has been removed from the blacklist.")
             await context.send(embed=embed)
         except:
             embed = disnake.Embed(

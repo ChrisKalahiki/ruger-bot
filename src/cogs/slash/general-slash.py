@@ -10,6 +10,7 @@ from disnake import ApplicationCommandInteraction, Option, OptionType
 from disnake.ext import commands
 
 from helpers import checks
+import logging
 
 if not os.path.isfile("../config.json"):
     sys.exit("'config.json' not found by general-slash! Please add it and try again.")
