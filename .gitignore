@@ -1,8 +1,6 @@
 old-files/config.json
 logs/discord.log
-data/Stardew_Cost_Effectiveness.xlsx
-data/~$Stardew_Cost_Effectiveness.xlsx
-data/stardew.json
+data/
 config.json
 blacklist.json
 fix_stardew.ipynb
