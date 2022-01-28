@@ -133,6 +133,7 @@ class Fun(commands.Cog, name="fun-normal"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{context.author} used the 'randomfact' command.")
                 await context.send(embed=embed)
 
     @commands.command(
@@ -164,6 +165,7 @@ class Fun(commands.Cog, name="fun-normal"):
                 description=f"Woops! You guessed `{buttons.choice}` and I flipped the coin to `{result}`, better luck next time!",
                 color=0xE02B2B
             )
+        logger.info(f"{context.author} used the 'coinflip' command.")
         await message.edit(embed=embed, view=None)
 
     @commands.command(
@@ -177,6 +179,7 @@ class Fun(commands.Cog, name="fun-normal"):
         :param context: The context in which the command has been executed.
         """
         view = RockPaperScissorsView()
+        logger.info(f"{context.author} used the 'rps' command.")
         await context.send("Please make your choice", view=view)
 
     @commands.command(
@@ -210,6 +213,7 @@ class Fun(commands.Cog, name="fun-normal"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{context.author} used the 'mtg' command to search for {query}.")
                 await context.send(embed=embed)
 
     @commands.command(
@@ -240,6 +244,7 @@ class Fun(commands.Cog, name="fun-normal"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{context.author} used the 'pokemon' command to search for {query}.")
                 await context.send(embed=embed)
 
     @commands.command(
@@ -269,6 +274,7 @@ class Fun(commands.Cog, name="fun-normal"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{context.author} used the 'anime' command to search for {query}.")
                 await context.send(embed=embed)
 
     @commands.command(
@@ -298,6 +304,7 @@ class Fun(commands.Cog, name="fun-normal"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{context.author} used the 'manga' command to search for {query}.")
                 await context.send(embed=embed)
 
 def setup(bot):

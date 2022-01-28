@@ -65,6 +65,7 @@ class General(commands.Cog, name="general-normal"):
         embed.set_footer(
             text=f"Requested by {context.author}"
         )
+        logger.info(f"Bot info requested by {context.author}.")
         await context.send(embed=embed)
 
     @commands.command(
@@ -110,6 +111,7 @@ class General(commands.Cog, name="general-normal"):
         embed.set_footer(
             text=f"Created at: {context.guild.created_at}"
         )
+        logger.info(f"Server info requested by {context.author}.")
         await context.send(embed=embed)
 
     @commands.command(
@@ -127,6 +129,7 @@ class General(commands.Cog, name="general-normal"):
             description=f"The bot latency is {round(self.bot.latency * 1000)}ms.",
             color=0x9C84EF
         )
+        logger.info(f"{context.author} pinged the bot.")
         await context.send(embed=embed)
 
     @commands.command(
@@ -145,6 +148,7 @@ class General(commands.Cog, name="general-normal"):
             description='{0.name} joined in {0.joined_at}'.format(member),
             color=0x9C84EF
         )
+        logger.info(f"{context.author} requested the join date of {member}.")
         await context.send(embed=embed)
 
     @commands.command(
@@ -163,6 +167,7 @@ class General(commands.Cog, name="general-normal"):
             description=f"{random.choice(choices)}",
             color=0x9C84EF
         )
+        logger.info(f"{context.author} chose from {choices}.")
         await context.send(embed=embed)
 
     @commands.command(
@@ -187,6 +192,7 @@ class General(commands.Cog, name="general-normal"):
             description=f'Results: ' + str(dice) + ' (' + ', '.join(str(i) for i in result) + ')\nTotal: ' + str(sum(result)),
             color=0x9C84EF
         )
+        logger.info(f"{context.author} rolled {dice}.")
         await context.send(embed=embed)
 
     # @commands.command(
@@ -254,6 +260,7 @@ class General(commands.Cog, name="general-normal"):
         embed.set_footer(
             text=f"The question was: {question}"
         )
+        logger.info(f"{context.author} asked the bot a question: {question}.")
         await context.send(embed=embed)
 
     @commands.command(
@@ -283,6 +290,7 @@ class General(commands.Cog, name="general-normal"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{context.author} asked the bot for the current price of bitcoin.")
                 await context.send(embed=embed)
 
 

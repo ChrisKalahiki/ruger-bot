@@ -133,6 +133,7 @@ class Fun(commands.Cog, name="fun-slash"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.inf(f"{interaction.author.display_name} requested a random fact.")
                 await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -164,6 +165,7 @@ class Fun(commands.Cog, name="fun-slash"):
                 description=f"Woops! You guessed `{buttons.choice}` and I flipped the coin to `{result}`, better luck next time!",
                 color=0xE02B2B
             )
+        logger.info(f"{interaction.author.display_name} flipped a coin.")
         await interaction.edit_original_message(embed=embed, view=None)
 
     @commands.slash_command(
@@ -177,6 +179,7 @@ class Fun(commands.Cog, name="fun-slash"):
         :param interaction: The application command interaction.
         """
         view = RockPaperScissorsView()
+        logger.info(f"{interaction.author.display_name} played rock paper scissors.")
         await interaction.send("Please make your choice", view=view)
 
     @commands.slash_command(
@@ -210,6 +213,7 @@ class Fun(commands.Cog, name="fun-slash"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{interaction.author.display_name} used the mtg command to search for {query}.")
                 await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -240,6 +244,7 @@ class Fun(commands.Cog, name="fun-slash"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{interaction.author.display_name} used the pokemon command to search for {query}.")
                 await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -269,6 +274,7 @@ class Fun(commands.Cog, name="fun-slash"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{interaction.author.display_name} used the anime command to search for {query}.")
                 await interaction.send(embed=embed)
     
     @commands.slash_command(
@@ -298,6 +304,7 @@ class Fun(commands.Cog, name="fun-slash"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{interaction.author.display_name} used the manga command to search for {query}.")
                 await interaction.send(embed=embed)
 
 def setup(bot):

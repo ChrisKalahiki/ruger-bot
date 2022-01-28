@@ -65,6 +65,7 @@ class General(commands.Cog, name="general-slash"):
         embed.set_footer(
             text=f"Requested by {interaction.author}"
         )
+        logger.info(f"Bot info requested by {interaction.author}.")
         await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -110,6 +111,7 @@ class General(commands.Cog, name="general-slash"):
         embed.set_footer(
             text=f"Created at: {interaction.guild.created_at}"
         )
+        logger.info(f"Server info requested by {interaction.author}.")
         await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -127,6 +129,7 @@ class General(commands.Cog, name="general-slash"):
             description=f"The bot latency is {round(self.bot.latency * 1000)}ms.",
             color=0x9C84EF
         )
+        logger.info(f"{interaction.author} pinged the server.")
         await interaction.send(embed=embed)
 
     @commands.command(
@@ -145,6 +148,7 @@ class General(commands.Cog, name="general-slash"):
             description='{0.name} joined in {0.joined_at}'.format(member),
             color=0x9C84EF
         )
+        logger.info(f"{interaction.author} requested the join date of {member}.")
         await interaction.send(embed=embed)
 
     @commands.command(
@@ -163,6 +167,7 @@ class General(commands.Cog, name="general-slash"):
             description=f"{random.choice(choices)}",
             color=0x9C84EF
         )
+        logger.info(f"{interaction.author} chose from {choices}.")
         await interaction.send(embed=embed)
 
     @commands.command(
@@ -187,6 +192,7 @@ class General(commands.Cog, name="general-slash"):
             description=f'Results: ' + str(dice) + ' (' + ', '.join(str(i) for i in result) + ')\nTotal: ' + str(sum(result)),
             color=0x9C84EF
         )
+        logger.info(f"{interaction.author} rolled {dice}.")
         await interaction.send(embed=embed)
 
     # @commands.slash_command(
@@ -262,6 +268,7 @@ class General(commands.Cog, name="general-slash"):
         embed.set_footer(
             text=f"The question was: {question}"
         )
+        logger.info(f"{interaction.author} asked the bot a question: {question}.")
         await interaction.send(embed=embed)
 
     @commands.slash_command(
@@ -291,6 +298,7 @@ class General(commands.Cog, name="general-slash"):
                         description="There is something wrong with the API, please try again later",
                         color=0xE02B2B
                     )
+                logger.info(f"{interaction.author} asked the bot for the current price of bitcoin.")
                 await interaction.send(embed=embed)
 
 
