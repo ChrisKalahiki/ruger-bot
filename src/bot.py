@@ -4,6 +4,7 @@ import os
 import platform
 import random
 import sys
+import youtube_dl
 
 import disnake
 from disnake import ApplicationCommandInteraction

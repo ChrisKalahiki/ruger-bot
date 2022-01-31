@@ -3,6 +3,7 @@ import os
 import platform
 import random
 import sys
+# import youtube_dl
 
 import aiohttp
 import disnake
@@ -24,6 +25,46 @@ logger.setLevel(logging.INFO)
 handler = logging.FileHandler(filename='../logs/discord.log', encoding='utf-8',mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)
+
+
+# ''' YouTube Integration '''
+# youtube_dl.utils.bug_reports_message = lambda: ''
+
+# ytdl_format_options = {
+#     'format': 'bestaudio/best',
+#     'restrictfilenames': True,
+#     'noplaylist': True,
+#     'nocheckcertificate': True,
+#     'ignoreerrors': False,
+#     'logtostderr': False,
+#     'quiet': True,
+#     'no_warnings': True,
+#     'default_search': 'auto',
+#     'source_address': '0.0.0.0' # bind to ipv4 since ipv6 addresses cause issues sometimes
+# }
+
+# ffmpeg_options = {
+#     'options': '-vn'
+# }
+
+# ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
+
+# class YTDLSource(disnake.PCMVolumeTransformer):
+#     def __init__(self, source, *, data, volume=0.5):
+#         super().__init__(source, volume)
+#         self.data = data
+#         self.title = data.get('title')
+#         self.url = data.get('url')
+
+#     @classmethod
+#     async def from_url(cls, url, *, loop=None, stream=False):
+#         loop = loop or asyncio.get_event_loop()
+#         data = await loop.run_in_executor(None, lambda: ytdl.extract_info(url, download=not stream))
+#         if 'entries' in data:
+#             # take first item from a playlist
+#             data = data['entries'][0]
+#         filename = data['url'] if stream else ytdl.prepare_filename(data)
+#         return cls(disnake.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
 
 class General(commands.Cog, name="general-normal"):
@@ -293,116 +334,120 @@ class General(commands.Cog, name="general-normal"):
                 logger.info(f"{context.author} asked the bot for the current price of bitcoin.")
                 await context.send(embed=embed)
 
-    @commands.command(
-        name='join',
-        description='Tells the bot to join a voice channel.'
-    )
-    @checks.not_blacklisted()
-    async def join(self, context: Context) -> None:
-        """
-        Tells the bot to join a voice channel.
-        :param context: The context in which the command has been executed.
-        """
-        channel = context.message.author.voice.channel
-        if channel is None:
-            await context.send('You are not in a voice channel!')
-            return
-        logger.info(f"{context.author} joined the voice channel.")
-        await channel.connect()
+    # @commands.command(
+    #     name='join',
+    #     description='Tells the bot to join a voice channel.'
+    # )
+    # @checks.not_blacklisted()
+    # async def join(self, context: Context) -> None:
+    #     """
+    #     Tells the bot to join a voice channel.
+    #     :param context: The context in which the command has been executed.
+    #     """
+    #     channel = context.message.author.voice.channel
+    #     if channel is None:
+    #         await context.send('You are not in a voice channel!')
+    #         return
+    #     else:
+    #         channel = context.message.author.voice.channel
+    #     logger.info(f"{context.author} joined the voice channel.")
+    #     await channel.connect()
 
-    @commands.command(
-        name='leave',
-        description='Tells the bot to leave the voice channel.'
-    )
-    @checks.not_blacklisted()
-    async def leave(self, context: Context) -> None:
-        """
-        Tells the bot to leave the voice channel.
-        :param context: The context in which the command has been executed.
-        """
-        channel = context.message.author.voice.channel
-        if channel is None:
-            await context.send('You are not in a voice channel!')
-            return
-        logger.info(f"{context.author} left the voice channel.")
-        await channel.disconnect()
+    # @commands.command(
+    #     name='leave',
+    #     description='Tells the bot to leave the voice channel.'
+    # )
+    # @checks.not_blacklisted()
+    # async def leave(self, context: Context) -> None:
+    #     """
+    #     Tells the bot to leave the voice channel.
+    #     :param context: The context in which the command has been executed.
+    #     """
+    #     channel = context.message.author.voice.channel
+    #     if channel is None:
+    #         await context.send('You are not in a voice channel!')
+    #         return
+    #     logger.info(f"{context.author} left the voice channel.")
+    #     await channel.disconnect()
 
-    @commands.command(
-        name='play',
-        description='Tells the bot to play a song.'
-    )
-    @checks.not_blacklisted()
-    async def play(self, context: Context, *, url: str) -> None:
-        """
-        Tells the bot to play a song.
-        :param context: The context in which the command has been executed.
-        :param url: The url of the song that should be played.
-        """
-        try:
-            server = context.message.guild
-            voice_channel = server.voice_client
+    # @commands.command(
+    #     name='play',
+    #     description='Tells the bot to play a song.'
+    # )
+    # @checks.not_blacklisted()
+    # async def play(self, context: Context, *, url: str) -> None:
+    #     """
+    #     Tells the bot to play a song.
+    #     :param context: The context in which the command has been executed.
+    #     :param url: The url of the song that should be played.
+    #     """
+    #     # try:
+    #     voice_channel = context.message.guild.voice_client
+    #     logger.debug(f'Voice channel: {voice_channel}')
 
-            async with context.typing():
-                filename = await YTDLSource.create_source(url, loop=self.bot.loop)
-                vocie_channel.play(disnake.FFmpegPCMAudio(executable="ffmpeg", source=filename))
-            logger.info(f"{context.author} played a song at {url}.")
-            await context.send(f"Now playing: {filename}")
-        except:
-            await context.send("The bot is not connected to a voice channel.")
+    #     async with context.typing():
+    #         filename = await YTDLSource.from_url(url, loop=self.bot.loop)
+    #         logger.debug(f'Filename: {filename}')
+    #         # voice_channel.play(disnake.FFmpegPCMAudio(executable="../assets/ffmpeg.exe", source=filename))
+    #         voice_channel.play(disnake.FFmpegPCMAudio(source=filename))
+    #     logger.info(f"{context.author} played a song at {url}.")
+    #     await context.send(f"Now playing: {filename}")
+    #     # except:
+    #     #     await context.send("The bot is not connected to a voice channel.")
 
-    @commands.command(
-        name='pause',
-        description='Tells the bot to pause the song.'
-    )
-    @checks.not_blacklisted()
-    async def pause(self, context: Context) -> None:
-        """
-        Tells the bot to pause the song.
-        :param context: The context in which the command has been executed.
-        """
-        voice_client = context.message.guild.voice_client
-        if voice_client.is_playing():
-            voice_client.pause()
-            logger.info(f"{context.author} paused the song.")
-            await context.send("Paused the song.")
-        else:
-            await context.send("The bot is not playing anything at the moment.")
+    # @commands.command(
+    #     name='pause',
+    #     description='Tells the bot to pause the song.'
+    # )
+    # @checks.not_blacklisted()
+    # async def pause(self, context: Context) -> None:
+    #     """
+    #     Tells the bot to pause the song.
+    #     :param context: The context in which the command has been executed.
+    #     """
+    #     voice_client = context.message.guild.voice_client
+    #     if voice_client.is_playing():
+    #         voice_client.pause()
+    #         logger.info(f"{context.author} paused the song.")
+    #         await context.send("Paused the song.")
+    #     else:
+    #         await context.send("The bot is not playing anything at the moment.")
 
-    @commands.command(
-        name='resume',
-        description='Tells the bot to resume the song.'
-    )
-    @checks.not_blacklisted()
-    async def resume(self, context: Context) -> None:
-        """
-        Tells the bot to resume the song.
-        :param context: The context in which the command has been executed.
-        """
-        voice_client = context.message.guild.voice_client
-        if voice_client.is_paused():
-            voice_client.resume()
-            logger.info(f"{context.author} resumed the song.")
-            await context.send("Resumed the song.")
-        else:
-            await context.send("The bot is not paused at the moment.")
+    # @commands.command(
+    #     name='resume',
+    #     description='Tells the bot to resume the song.'
+    # )
+    # @checks.not_blacklisted()
+    # async def resume(self, context: Context) -> None:
+    #     """
+    #     Tells the bot to resume the song.
+    #     :param context: The context in which the command has been executed.
+    #     """
+    #     voice_client = context.message.guild.voice_client
+    #     if voice_client.is_paused():
+    #         voice_client.resume()
+    #         logger.info(f"{context.author} resumed the song.")
+    #         await context.send("Resumed the song.")
+    #     else:
+    #         await context.send("The bot is not paused at the moment.")
 
-    @commands.command(
-        name='stop',
-        description='Tells the bot to stop the song.'
-    )
-    @checks.not_blacklisted()
-    async def stop(self, context: Context) -> None:
-        """
-        Tells the bot to stop the song.
-        :param context: The context in which the command has been executed.
-        """
-        voice_client = context.message.guild.voice_client
-        if voice_client.is_playing():
-            voice_client.stop()
-            logger.info(f"{context.author} stopped the song.")
-            await context.send("Stopped the song.")
-        else:
-            await context.send("The bot is not playing anything at the moment.")
+    # @commands.command(
+    #     name='stop',
+    #     description='Tells the bot to stop the song.'
+    # )
+    # @checks.not_blacklisted()
+    # async def stop(self, context: Context) -> None:
+    #     """
+    #     Tells the bot to stop the song.
+    #     :param context: The context in which the command has been executed.
+    #     """
+    #     voice_client = context.message.guild.voice_client
+    #     if voice_client.is_playing():
+    #         voice_client.stop()
+    #         logger.info(f"{context.author} stopped the song.")
+    #         await context.send("Stopped the song.")
+    #     else:
+    #         await context.send("The bot is not playing anything at the moment.")
 
 def setup(bot):
     bot.add_cog(General(bot))
