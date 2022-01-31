@@ -134,7 +134,10 @@ This project has a few pre-requisites before you can get up and running. They ar
       },
       "discord":"yourDiscordToken",
       "guildID":"yourGuildID",
-      "prefix":"."
+      "prefix":".",
+      "owners": [
+        "yourOwnerID"
+      ]
   }
   ```
 4. Create a new directory called logs and add a log file called `discord.log` inside of it.
