@@ -1,6 +1,5 @@
-old-files/config.json
-logs/discord.log
+old-files/
+logs/
 data/
 config.json
-blacklist.json
 fix_stardew.ipynb

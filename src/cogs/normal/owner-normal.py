@@ -79,7 +79,7 @@ class Owner(commands.Cog, name="owner-normal"):
         Lets you add or remove a user from not being able to use the bot.
         """
         if context.invoked_subcommand is None:
-            with open("../blacklist.json") as file:
+            with open("../data/blacklist.json") as file:
                 blacklist = json.load(file)
             embed = disnake.Embed(
                 title=f"There are currently {len(blacklist['ids'])} blacklisted IDs",
@@ -97,7 +97,7 @@ class Owner(commands.Cog, name="owner-normal"):
         """
         try:
             user_id = member.id
-            with open("../blacklist.json") as file:
+            with open("../data/blacklist.json") as file:
                 blacklist = json.load(file)
             if user_id in blacklist['ids']:
                 embed = disnake.Embed(
@@ -112,7 +112,7 @@ class Owner(commands.Cog, name="owner-normal"):
                 description=f"**{member.name}** has been successfully added to the blacklist",
                 color=0x9C84EF
             )
-            with open("../blacklist.json") as file:
+            with open("../data/blacklist.json") as file:
                 blacklist = json.load(file)
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"
@@ -142,7 +142,7 @@ class Owner(commands.Cog, name="owner-normal"):
                 description=f"**{member.name}** has been successfully removed from the blacklist",
                 color=0x9C84EF
             )
-            with open("../blacklist.json") as file:
+            with open("../data/blacklist.json") as file:
                 blacklist = json.load(file)
             embed.set_footer(
                 text=f"There are now {len(blacklist['ids'])} users in the blacklist"

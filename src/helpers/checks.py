@@ -30,7 +30,7 @@ def not_blacklisted() -> Callable[[T], T]:
     """
 
     async def predicate(context: commands.Context) -> bool:
-        with open("../blacklist.json") as file:
+        with open("../data/blacklist.json") as file:
             data = json.load(file)
         if context.author.id in data["ids"]:
             raise UserBlacklisted
