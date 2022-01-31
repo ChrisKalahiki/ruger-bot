@@ -10,8 +10,8 @@ stop:
 clear:
 	@docker rm ruger-bot
 
-start: build run
+up: build run
 
-wipe: stop clear
+down: stop clear
 
-all: wipe start
+all: down up
