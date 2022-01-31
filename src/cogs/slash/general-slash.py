@@ -301,6 +301,117 @@ class General(commands.Cog, name="general-slash"):
                 logger.info(f"{interaction.author} asked the bot for the current price of bitcoin.")
                 await interaction.send(embed=embed)
 
+    @commands.command(
+        name='join',
+        description='Tells the bot to join a voice channel.'
+    )
+    @checks.not_blacklisted()
+    async def join(self, interaction: ApplicationCommandInteraction) -> None:
+        """
+        Tells the bot to join a voice channel.
+        :param interaction: The interaction in which the command has been executed.
+        """
+        channel = interaction.message.author.voice.channel
+        if channel is None:
+            await interaction.send('You are not in a voice channel!')
+            return
+        logger.info(f"{interaction.author} joined the voice channel.")
+        await channel.connect()
+
+    @commands.command(
+        name='leave',
+        description='Tells the bot to leave the voice channel.'
+    )
+    @checks.not_blacklisted()
+    async def leave(self, interaction: ApplicationCommandInteraction) -> None:
+        """
+        Tells the bot to leave the voice channel.
+        :param interaction: The interaction in which the command has been executed.
+        """
+        channel = interaction.message.author.voice.channel
+        if channel is None:
+            await interaction.send('You are not in a voice channel!')
+            return
+        logger.info(f"{interaction.author} left the voice channel.")
+        await channel.disconnect()
+
+    @commands.command(
+        name='play',
+        description='Tells the bot to play a song.'
+    )
+    @checks.not_blacklisted()
+    async def play(self, interaction: ApplicationCommandInteraction, *, url: str) -> None:
+        """
+        Tells the bot to play a song.
+        :param interaction: The interaction in which the command has been executed.
+        :param url: The url of the song that should be played.
+        """
+        try:
+            server = interaction.message.guild
+            voice_channel = server.voice_client
+
+            async with interaction.typing():
+                filename = await YTDLSource.create_source(url, loop=self.bot.loop)
+                vocie_channel.play(disnake.FFmpegPCMAudio(executable="ffmpeg", source=filename))
+            logger.info(f"{interaction.author} played a song at {url}.")
+            await interaction.send(f"Now playing: {filename}")
+        except:
+            await interaction.send("The bot is not connected to a voice channel.")
+
+    @commands.command(
+        name='pause',
+        description='Tells the bot to pause the song.'
+    )
+    @checks.not_blacklisted()
+    async def pause(self, interaction: ApplicationCommandInteraction) -> None:
+        """
+        Tells the bot to pause the song.
+        :param interaction: The interaction in which the command has been executed.
+        """
+        voice_client = interaction.message.guild.voice_client
+        if voice_client.is_playing():
+            voice_client.pause()
+            logger.info(f"{interaction.author} paused the song.")
+            await interaction.send("Paused the song.")
+        else:
+            await interaction.send("The bot is not playing anything at the moment.")
+
+    @commands.command(
+        name='resume',
+        description='Tells the bot to resume the song.'
+    )
+    @checks.not_blacklisted()
+    async def resume(self, interaction: ApplicationCommandInteraction) -> None:
+        """
+        Tells the bot to resume the song.
+        :param interaction: The interaction in which the command has been executed.
+        """
+        voice_client = interaction.message.guild.voice_client
+        if voice_client.is_paused():
+            voice_client.resume()
+            logger.info(f"{interaction.author} resumed the song.")
+            await interaction.send("Resumed the song.")
+        else:
+            await interaction.send("The bot is not paused at the moment.")
+
+    @commands.command(
+        name='stop',
+        description='Tells the bot to stop the song.'
+    )
+    @checks.not_blacklisted()
+    async def stop(self, interaction: ApplicationCommandInteraction) -> None:
+        """
+        Tells the bot to stop the song.
+        :param interaction: The interaction in which the command has been executed.
+        """
+        voice_client = interaction.message.guild.voice_client
+        if voice_client.is_playing():
+            voice_client.stop()
+            logger.info(f"{interaction.author} stopped the song.")
+            await interaction.send("Stopped the song.")
+        else:
+            await interaction.send("The bot is not playing anything at the moment.")
+
 
 def setup(bot):
     bot.add_cog(General(bot))
