@@ -231,16 +231,16 @@ Project Link: [https://github.com/ChrisKalahiki/ruger-bot](https://github.com/Ch
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/ChrisKalahiki/ruger-bot?style=for-the-badge
 [contributors-url]: https://github.com/ChrisKalahiki/ruger-bot/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/ChrisKalahiki/ruger-bot?style=for-the-badge
 [forks-url]: https://github.com/ChrisKalahiki/ruger-bot/network/members
-[stars-shield]: https://img.shields.io/github/stars/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/ChrisKalahiki/ruger-bot?style=for-the-badge
 [stars-url]: https://github.com/ChrisKalahiki/ruger-bot/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/ChrisKalahiki/ruger-bot?style=for-the-badge
 [issues-url]: https://github.com/ChrisKalahiki/ruger-bot/issues
-[license-shield]: https://img.shields.io/github/license/ChrisKalahiki/ruger-bot.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/ChrisKalahiki/ruger-bot?style=for-the-badge
 [license-url]: https://github.com/ChrisKalahiki/ruger-bot/blob/master/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/chriskalahiki
 [product-screenshot]: images/screenshot.png
